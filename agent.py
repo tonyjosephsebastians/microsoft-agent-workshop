@@ -58,11 +58,11 @@ async def main() -> None:
         api_version=api_version,
         credential=None if api_key else AzureCliCredential(),
     ).as_agent(
-        name="HaikuBot",
-        instructions="You are an upbeat assistant that writes beautiful poetry.",
+        name="Joker",
+        instructions="You are good at telling jokes.",
     )
 
-    result = await agent.run("Write a haiku about the Nurse.")
+    result = await agent.run("Tell me a joke about Mohanlal in Malayalam.")
     print(result.text)
 
 

@@ -55,4 +55,4 @@ Expected behavior: the script creates a simple `HaikuBot` agent and prints a hai
 
 - `.env` is ignored by git and is not committed.
 - The current script normalizes old dated Azure API versions such as `2024-12-01-preview` to `preview` for the v1 Responses flow.
-- This sample uses the current `OpenAIChatClient` pattern instead of the older `AzureOpenAIResponsesClient` import.
+- This sample uses the current `OpenAIChatClient` pattern instead of older Azure-specific imports such as `AzureOpenAIChatClient` or `AzureOpenAIResponsesClient`.

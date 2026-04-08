@@ -1,10 +1,12 @@
 import asyncio
 import importlib.metadata
 import os
+from typing import Annotated
 
 import agent_framework
 from azure.identity import AzureCliCredential
 from dotenv import load_dotenv
+from pydantic import Field
 
 # agent-framework 1.0.0 expects __version__ to exist on the top-level package.
 if not getattr(agent_framework, "__version__", None):
@@ -33,6 +35,13 @@ def normalize_api_version(value: str | None) -> str | None:
     return value
 
 
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is cloudy with a high of 15 degrees C."
+
+
 async def main() -> None:
     endpoint = first_env("AZURE_OPENAI_ENDPOINT")
     model = first_env(
@@ -58,11 +67,12 @@ async def main() -> None:
         api_version=api_version,
         credential=None if api_key else AzureCliCredential(),
     ).as_agent(
-        name="HaikuBot",
-        instructions="You are an upbeat assistant that writes beautiful poetry.",
+        name="WeatherBot",
+        instructions="You are a helpful assistant.",
+        tools=get_weather,
     )
 
-    result = await agent.run("Write a haiku about the Nurse.")
+    result = await agent.run("Tell me the weather in Los Angeles.")
     print(result.text)
 
 
