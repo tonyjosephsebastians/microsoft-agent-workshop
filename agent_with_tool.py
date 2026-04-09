@@ -72,7 +72,7 @@ async def main() -> None:
         tools=get_weather,
     )
 
-    result = await agent.run("Tell me the weather in Los Angeles.")
+    result = await agent.run("Tell me about csk")
     print(result.text)
 
 

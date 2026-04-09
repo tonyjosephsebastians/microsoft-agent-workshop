@@ -62,7 +62,7 @@ async def main() -> None:
         instructions="You are good at telling jokes.",
     )
 
-    result = await agent.run("Tell me a joke about Mohanlal in Malayalam.")
+    result = await agent.run("Tell me a joke about Mohanlal.")
     print(result.text)
 
 
